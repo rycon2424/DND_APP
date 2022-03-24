@@ -5,6 +5,7 @@ using UnityEngine;
 public class GlobalAnimator : MonoBehaviour
 {
     public static GlobalAnimator animator;
+    public GameObject introText;
 
     private void Awake()
     {
@@ -16,6 +17,11 @@ public class GlobalAnimator : MonoBehaviour
 
     public void Animate(GameObject objectToAnimate, AnimationObject animationType)
     {
+        if (introText.activeSelf) // On first interaction with the map disable the welcome text
+        {
+            introText.SetActive(false);
+        }
+
         Vector3 localScale = objectToAnimate.transform.localScale;
         Vector3 endScale = new Vector3(animationType.endScale, animationType.endScale, animationType.endScale);
         switch (animationType.typeAnimation)
