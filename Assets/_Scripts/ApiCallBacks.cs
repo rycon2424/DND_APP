@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 
-public class ApiTest : MonoBehaviour
+public class ApiCallBacks : MonoBehaviour
 {
     HttpClient client = new HttpClient();
     [SerializeField] AllSpells spellNames;
@@ -44,8 +44,6 @@ public class AllSpells
 public class Results
 {
     public string name;
-    public string index;
+    //public string index;
     public string url;
 }
-
-
