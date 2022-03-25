@@ -55,5 +55,6 @@ public class GlobalAnimator : MonoBehaviour
             objectToScale.transform.localScale = Vector3.Lerp(startScale, endScale, t);
             yield return new WaitForEndOfFrame();
         }
+        objectToScale.transform.localScale = endScale;
     }
 }
