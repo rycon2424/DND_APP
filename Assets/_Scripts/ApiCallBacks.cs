@@ -30,7 +30,6 @@ public class ApiCallBacks : MonoBehaviour
 
     public InDepthSpellInfo GetSpellInfo(string url)
     {
-        Debug.Log(url);
         Task<InDepthSpellInfo> infoTask = Task.Run<InDepthSpellInfo>(async () => await GetSpellInfoAsync(url));
         InDepthSpellInfo info = infoTask.Result;
         return info;
@@ -44,7 +43,6 @@ public class ApiCallBacks : MonoBehaviour
         if (response.IsSuccessStatusCode)
         {
             data = await response.Content.ReadAsStringAsync();
-            Debug.Log(data);
             info = JsonUtility.FromJson<InDepthSpellInfo>(data);
         }
         return info;
@@ -83,7 +81,6 @@ public class MagicSchool
 {
     public string name;
 }
-
 
 [System.Serializable]
 public class InDepthSpellInfo

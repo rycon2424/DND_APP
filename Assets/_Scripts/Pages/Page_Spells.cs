@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using TMPro;
 
@@ -19,8 +20,18 @@ public class Page_Spells : DND_Page
     [SerializeField] TMP_Text spellLevel;
     [SerializeField] TMP_Text spellDesc;
     [SerializeField] TMP_Text spellAtHigher;
+    [Space]
+    [SerializeField] RectTransform contentBox;
+    [SerializeField] [ReadOnly] float defaultContentBoxHeight;
+    [SerializeField] [ReadOnly] float defaultSpellDescBoxHeight;
 
     [SerializeField] List<SpellBlock> spells = new List<SpellBlock>();
+
+    private void Start()
+    {
+        defaultContentBoxHeight = contentBox.sizeDelta.y;
+        defaultSpellDescBoxHeight = spellDesc.GetComponent<RectTransform>().sizeDelta.y;
+    }
 
     public override void LoadPage() // Called when page is opened
     {
@@ -47,6 +58,9 @@ public class Page_Spells : DND_Page
 
     public void LoadSpell(Results spell)
     {
+        contentBox.sizeDelta = new Vector2(contentBox.sizeDelta.x, defaultContentBoxHeight);
+        spellDesc.GetComponent<RectTransform>().sizeDelta = new Vector2(spellDesc.GetComponent<RectTransform>().sizeDelta.x, defaultSpellDescBoxHeight);
+
         spellTab.SetActive(true);
         InDepthSpellInfo spellInfo = ApiCallBacks.instance.GetSpellInfo("https://www.dnd5eapi.co" + spell.url);
         spellName.text = spellInfo.name;
@@ -64,6 +78,15 @@ public class Page_Spells : DND_Page
             descriptionTemp += paragraph;
         }
         spellDesc.text = descriptionTemp;
+
+        int textLength = descriptionTemp.Length;
+        Debug.Log(textLength);
+        if (textLength > 500)
+        {
+            int extraLength = (textLength - 500) * 4;
+            spellDesc.GetComponent<RectTransform>().sizeDelta += new Vector2(0, extraLength);
+            contentBox.sizeDelta += new Vector2(0, extraLength);
+        }
 
         descriptionTemp = "";
         foreach (string paragraph in spellInfo.higher_level)
