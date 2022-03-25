@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Page_Calculator : DND_Page
 {
+    [SerializeField]
+    private Calculator _calculator;
+
     public override void LoadPage() // Called when page is opened
     {
         base.LoadPage();
@@ -16,6 +19,7 @@ public class Page_Calculator : DND_Page
 
     public override void ResetPage() // Called on the corner button with the reset logo
     {
-
+        _calculator.Clear();
+        _calculator.UpdateUI();
     }
 }
