@@ -29,17 +29,15 @@ public class Page_Spells : DND_Page
 
     private void Start()
     {
+        spellTab.SetActive(false);
         defaultContentBoxHeight = contentBox.sizeDelta.y;
         defaultSpellDescBoxHeight = spellDesc.GetComponent<RectTransform>().sizeDelta.y;
+
+        StartCoroutine(LoadSpells());
     }
 
     public override void LoadPage() // Called when page is opened
     {
-        if (lastPage != this)
-        {
-            gameObject.SetActive(true);
-            StartCoroutine(LoadSpells());
-        }
         base.LoadPage();
     }
 
