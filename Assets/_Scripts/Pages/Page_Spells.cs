@@ -24,8 +24,12 @@ public class Page_Spells : DND_Page
 
     public override void LoadPage() // Called when page is opened
     {
+        if (lastPage != this)
+        {
+            gameObject.SetActive(true);
+            StartCoroutine(LoadSpells());
+        }
         base.LoadPage();
-        StartCoroutine(LoadSpells());
     }
 
     IEnumerator LoadSpells()
