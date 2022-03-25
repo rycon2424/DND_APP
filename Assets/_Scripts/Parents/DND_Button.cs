@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 public class DND_Button : MonoBehaviour, IAnimatable, IPointerClickHandler, IButton
 {
     [ReadOnly] [SerializeField] bool clickable = true;
+    [ShowIf("@this.animationType.typeAnimation != AnimationType.none")]
+    [SerializeField] bool waitForAnimation;
     public UnityEvent OnButtonPressed;
     [Space]
     public AnimationObject animationType;
@@ -20,7 +22,9 @@ public class DND_Button : MonoBehaviour, IAnimatable, IPointerClickHandler, IBut
 
     IEnumerator ClickAbleAgain()
     {
-        clickable = false;
+        if (waitForAnimation == true)
+            clickable = false;
+
         if (animationType.typeAnimation == AnimationType.none)
         {
             yield return new WaitForSeconds(1);
