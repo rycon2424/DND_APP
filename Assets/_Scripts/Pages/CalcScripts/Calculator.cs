@@ -56,7 +56,16 @@ public class Calculator : MonoBehaviour
 
     public void InputOperator(int input)
     {
-        OpInput = (Operator)input;
+        if (_numInput2 == 0)
+        {
+            OpInput = (Operator)input;
+        }
+        else
+        {
+            OpInput = (Operator)input;
+            GetSum();
+            OpInput = (Operator)input;
+        }
         UpdateUI();
     }
 
