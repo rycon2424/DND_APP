@@ -39,7 +39,7 @@ public class Calculator : MonoBehaviour
 
     public void InputNumber(int input)
     {
-        if (_numInput1 == 0)
+        if (_numInput1 == 0 && OpInput == Operator.None)
         {
             _numInput1 = input;
         }
