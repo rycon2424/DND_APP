@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -1778,7 +1778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -2342,7 +2342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -2452,7 +2452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -2562,7 +2562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -2724,7 +2724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls: []
@@ -2785,7 +2785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -3506,7 +3506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -3728,7 +3728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -4181,7 +4181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -4530,7 +4530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -4909,7 +4909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -5019,7 +5019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  waitForAnimation: 0
+  waitForAnimation: 1
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
