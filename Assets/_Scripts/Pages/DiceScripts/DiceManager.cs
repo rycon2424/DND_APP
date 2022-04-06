@@ -12,6 +12,10 @@ public class DiceManager : MonoBehaviour
     private List<TMP_Text> _dieAmountText;
     private int[] _dieAmounts = new int[7] { 0, 0, 0, 0, 0, 0, 0};
 
+    [SerializeField]
+    private TMP_Text _modifierText;
+    private int _modifier = 0;
+
     private List<Die> _dice = new List<Die>();
 
     public void AddDie(int dieIdentifier)
@@ -52,17 +56,57 @@ public class DiceManager : MonoBehaviour
 
     public void RollAll()
     {
-        int totalRoll = 0;
-        foreach (Die die in _dice)
+        if (_dice.Count == 0)
         {
-            totalRoll+= die.Roll();
+            _outputText.text = "Select the dices to use!";
+            return;
         }
-        _outputText.text = totalRoll.ToString();
+        int totalRoll = 0;
+        string displayedText = "";
+        for (int i = 0; i < _dice.Count; i++)
+        {
+            int roll = _dice[i].Roll();
+            totalRoll += roll;
+            displayedText += roll;
+            if (i != _dice.Count - 1)
+            {
+                displayedText += " + ";
+            }
+        }
+        totalRoll += _modifier;
+        if (_modifier > 0)
+        {
+            displayedText += " + " + _modifier;
+        }
+        else if (_modifier < 0)
+        {
+            displayedText += " - " + _modifier;
+
+        }
+        _outputText.text = displayedText + " = " + totalRoll.ToString();
         ResetAll();
 
-        //ADD VISABLE DICE RESULTS
-        //ADD DICE SPRITES
         //ADD A MODIFIER THAT YOU CAN SET
+        //ADD DISADVANTAGE AND ADVANTAGE ROLL
+    }
+
+    public void AdjustModifier(bool addUp)
+    {
+        _modifierText.text = "";
+        if (addUp)
+        {
+            _modifier++;
+        }
+        else
+        {
+            _modifier--;
+        }
+
+        if (_modifier > 0)
+        {
+            _modifierText.text += "+";
+        }
+        _modifierText.text += _modifier.ToString();
     }
 
     private void ResetAll()
