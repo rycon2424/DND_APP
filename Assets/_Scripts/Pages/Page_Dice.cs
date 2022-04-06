@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Page_Dice : DND_Page
 {
+    [SerializeField]
+    private DiceManager _diceManager;
+
     public override void LoadPage() // Called when page is opened
     {
         base.LoadPage();
@@ -16,7 +19,7 @@ public class Page_Dice : DND_Page
 
     public override void ResetPage() // Called on the corner button with the reset logo
     {
-
+        _diceManager.ResetPage();
     }
 
 }

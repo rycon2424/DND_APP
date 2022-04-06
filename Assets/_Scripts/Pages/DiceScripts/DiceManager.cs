@@ -74,20 +74,9 @@ public class DiceManager : MonoBehaviour
             }
         }
         totalRoll += _modifier;
-        if (_modifier > 0)
-        {
-            displayedText += " + " + _modifier;
-        }
-        else if (_modifier < 0)
-        {
-            displayedText += " - " + _modifier;
-
-        }
+        displayedText += AddModifierText();
         _outputText.text = displayedText + " = " + totalRoll.ToString();
-        ResetAll();
-
-        //ADD A MODIFIER THAT YOU CAN SET
-        //ADD DISADVANTAGE AND ADVANTAGE ROLL
+        ResetSelectedDice();
     }
 
     public void AdjustModifier(bool addUp)
@@ -109,7 +98,49 @@ public class DiceManager : MonoBehaviour
         _modifierText.text += _modifier.ToString();
     }
 
-    private void ResetAll()
+    public void RollStaight()
+    {
+        string output = "";
+        int roll = new Die(20).Roll();
+        output += roll.ToString() + AddModifierText();
+        roll += _modifier;
+        output += " = " + roll;
+        _outputText.text = output;
+    }
+
+    public void RollAdvantage()
+    {
+        string output = "";
+        int roll1 = new Die(20).Roll();
+        int roll2 = new Die(20).Roll();
+        int highest = Mathf.Max(roll1, roll2);
+        output += "(" + roll1.ToString() + " + " + roll2.ToString() + ")" + AddModifierText();
+        highest += _modifier;
+        output += " = " + highest;
+        _outputText.text = output;
+    }
+
+    public void RollDisadvantage()
+    {
+        string output = "";
+        int roll1 = new Die(20).Roll();
+        int roll2 = new Die(20).Roll();
+        int lowest = Mathf.Min(roll1, roll2);
+        output += "(" + roll1.ToString() + " + " + roll2.ToString() + ")" + AddModifierText();
+        lowest += _modifier;
+        output += " = " + lowest;
+        _outputText.text = output;
+    }
+
+    public void ResetPage()
+    {
+        ResetSelectedDice();
+        _modifier = 0;
+        _modifierText.text = _modifier.ToString();
+        _outputText.text = "";
+    }
+
+    private void ResetSelectedDice()
     {
         _dice = new List<Die>();
         for (int i = 0; i < _dieAmountText.Count; i++)
@@ -117,5 +148,20 @@ public class DiceManager : MonoBehaviour
             _dieAmounts[i] = 0;
             _dieAmountText[i].text = "";
         }
+    }
+
+    private string AddModifierText()
+    {
+        string displayedText = "";
+        if (_modifier > 0)
+        {
+            displayedText += " + " + _modifier;
+        }
+        else if (_modifier < 0)
+        {
+            displayedText += " - " + Mathf.Abs(_modifier);
+
+        }
+        return displayedText;
     }
 }
