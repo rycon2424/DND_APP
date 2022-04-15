@@ -8,8 +8,6 @@ public class DiceManager : MonoBehaviour
     [SerializeField]
     private TMP_Text _outputText;
 
-    [SerializeField]
-    private List<TMP_Text> _dieAmountText;
     private int[] _dieAmounts = new int[7] { 0, 0, 0, 0, 0, 0, 0};
 
     [SerializeField]
@@ -18,46 +16,71 @@ public class DiceManager : MonoBehaviour
 
     private List<Die> _dice = new List<Die>();
 
+    private bool _hasRolled;
+
     public void AddDie(int dieIdentifier)
     {
+        if (_hasRolled)
+        {
+            _outputText.text = "";
+            _hasRolled = false;
+        }
+
         _dice.Add(new Die(dieIdentifier));
 
         int index = 0;      //Link the correct text componenets and amounts to the clicked button
+        string dieNumber = "";
         switch (dieIdentifier)
         {
             case 4:
                 index = 0;
+                dieNumber = "d4";
                 break;
             case 6:
                 index = 1;
+                dieNumber = "d6";
                 break;
             case 8:
                 index = 2;
+                dieNumber = "d8";
                 break;
             case 10:
                 index = 3;
+                dieNumber = "d10";
                 break;
             case 12:
                 index = 4;
+                dieNumber = "d12";
                 break;
             case 20:
                 index = 5;
+                dieNumber = "d20";
                 break;
             case 100:
                 index = 6;
+                dieNumber = "d100";
                 break;
             default:
                 index = 0;
+                dieNumber = "??";
                 break;
         }
         _dieAmounts[index]++;
-        _dieAmountText[index].text = _dieAmounts[index].ToString();
+        if (_outputText.text == "")
+        {
+            _outputText.text = dieNumber;
+        }
+        else
+        {
+            _outputText.text += " + " + dieNumber;
+        }
     }
 
     public void RollAll()
     {
         if (_dice.Count == 0)
         {
+            _hasRolled = true;
             _outputText.text = "Select the dices to use!";
             return;
         }
@@ -76,7 +99,7 @@ public class DiceManager : MonoBehaviour
         totalRoll += _modifier;
         displayedText += AddModifierText();
         _outputText.text = displayedText + " = " + totalRoll.ToString();
-        ResetSelectedDice();
+        _hasRolled = true;
     }
 
     public void AdjustModifier(bool addUp)
@@ -134,20 +157,9 @@ public class DiceManager : MonoBehaviour
 
     public void ResetPage()
     {
-        ResetSelectedDice();
         _modifier = 0;
         _modifierText.text = _modifier.ToString();
         _outputText.text = "";
-    }
-
-    private void ResetSelectedDice()
-    {
-        _dice = new List<Die>();
-        for (int i = 0; i < _dieAmountText.Count; i++)
-        {
-            _dieAmounts[i] = 0;
-            _dieAmountText[i].text = "";
-        }
     }
 
     private string AddModifierText()
@@ -155,11 +167,11 @@ public class DiceManager : MonoBehaviour
         string displayedText = "";
         if (_modifier > 0)
         {
-            displayedText += " + " + _modifier;
+            displayedText += " + (+" + _modifier + ")";
         }
         else if (_modifier < 0)
         {
-            displayedText += " - " + Mathf.Abs(_modifier);
+            displayedText += " - (-" + Mathf.Abs(_modifier) + ")";
 
         }
         return displayedText;
