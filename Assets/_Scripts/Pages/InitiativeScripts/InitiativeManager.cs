@@ -8,19 +8,14 @@ public class InitiativeManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject _infoSpawnable;
-
     [SerializeField]
     private TMP_InputField _nameField;
-
     [SerializeField]
     private TMP_InputField _numbField;
-
     [SerializeField]
     private RectTransform _container;
-
     [SerializeField]
     private const int _componentHeight = 110;
-
     [SerializeField]
     private List<CreatureInfo> _allCreatures = new List<CreatureInfo>();
 

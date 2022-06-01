@@ -6,10 +6,8 @@ public class CreatureInfo
 {
     [SerializeField]
     private string _name;
-
     [SerializeField]
     private int _initiative;
-
     private GameObject _go;
 
     public string Name

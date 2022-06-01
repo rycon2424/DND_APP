@@ -7,7 +7,6 @@ public class CharacterInfoAssigner : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text _name;
-
     [SerializeField]
     private TMP_Text _initiative;
 

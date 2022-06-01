@@ -50,7 +50,7 @@ public class ApiCallBacks : MonoBehaviour
 
     async Task<AllSpells> GetSpellAsync(string path)
     {
-        AllSpells spell = null;
+        AllSpells spell = new AllSpells();
         string data = "";
         HttpResponseMessage response = await client.GetAsync(path);
         if (response.IsSuccessStatusCode)
@@ -63,21 +63,21 @@ public class ApiCallBacks : MonoBehaviour
 }
 
 [System.Serializable]
-public class AllSpells
+public struct AllSpells
 { 
     public int count;
     public Results[] results;
 }
 
 [System.Serializable]
-public class Results
+public struct Results
 {
     public string name;
     public string url;
 }
 
 [System.Serializable]
-public class MagicSchool
+public struct MagicSchool
 {
     public string name;
 }
