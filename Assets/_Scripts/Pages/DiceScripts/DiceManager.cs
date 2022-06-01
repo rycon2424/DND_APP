@@ -100,6 +100,8 @@ public class DiceManager : MonoBehaviour
         displayedText += AddModifierText();
         _outputText.text = displayedText + " = " + totalRoll.ToString();
         _hasRolled = true;
+        _dice.Clear();
+        _dice = new List<Die>();
     }
 
     public void AdjustModifier(bool addUp)
@@ -160,6 +162,8 @@ public class DiceManager : MonoBehaviour
         _modifier = 0;
         _modifierText.text = _modifier.ToString();
         _outputText.text = "";
+        _dice.Clear();
+        _dice = new List<Die>();
     }
 
     private string AddModifierText()
