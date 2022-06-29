@@ -6,22 +6,16 @@ using System.Linq;
 
 public class InitiativeManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _infoSpawnable;
-    [SerializeField]
-    private TMP_InputField _nameField;
-    [SerializeField]
-    private TMP_InputField _numbField;
-    [SerializeField]
-    private RectTransform _container;
-    [SerializeField]
-    private const int _componentHeight = 110;
-    [SerializeField]
-    private List<CreatureInfo> _allCreatures = new List<CreatureInfo>();
+    [SerializeField] GameObject infoSpawnable;
+    [SerializeField] TMP_InputField nameField;
+    [SerializeField] TMP_InputField numbField;
+    [SerializeField] RectTransform container;
+    [SerializeField] const int componentHeight = 110;
+    [SerializeField] List<CreatureInfo> allCreatures = new List<CreatureInfo>();
 
     public void ConfirmButton()
     {
-        if (_nameField.text == "" || _numbField.text == "" || _numbField.text == "-")
+        if (nameField.text == "" || numbField.text == "" || numbField.text == "-")
         {
             ClearCreationWindow();
             return;
@@ -32,10 +26,10 @@ public class InitiativeManager : MonoBehaviour
 
     private void SpawnInfo()
     {
-        _container.sizeDelta = new Vector2(_container.sizeDelta.x, _container.sizeDelta.y + _componentHeight);
-        GameObject go = Instantiate(_infoSpawnable, _container);
-        CreatureInfo info = new CreatureInfo(_nameField.text, int.Parse(_numbField.text), go);
-        _allCreatures.Add(info);
+        container.sizeDelta = new Vector2(container.sizeDelta.x, container.sizeDelta.y + componentHeight);
+        GameObject go = Instantiate(infoSpawnable, container);
+        CreatureInfo info = new CreatureInfo(nameField.text, int.Parse(numbField.text), go);
+        allCreatures.Add(info);
         go.GetComponent<CharacterInfoAssigner>().ApplyCreatureInfo(info);
         UpdateList();
     }
@@ -43,39 +37,39 @@ public class InitiativeManager : MonoBehaviour
     public void UpdateList()
     {
         List<CreatureInfo> newList = new List<CreatureInfo>();
-        for (int i = 0; i < _allCreatures.Count; i++)
+        for (int i = 0; i < allCreatures.Count; i++)
         {
-            if (_allCreatures[i].Go != null)
+            if (allCreatures[i].Go != null)
             {
-                newList.Add(_allCreatures[i]);
+                newList.Add(allCreatures[i]);
             }
             else
             {
-                _container.sizeDelta = new Vector2(_container.sizeDelta.x, _container.sizeDelta.y - _componentHeight);
+                container.sizeDelta = new Vector2(container.sizeDelta.x, container.sizeDelta.y - componentHeight);
             }
         }
         var orderedList = newList.OrderBy(x => x.Initiative).ToList();
-        _allCreatures = orderedList;
+        allCreatures = orderedList;
 
-        for (int i = 0; i < _allCreatures.Count; i++)
+        for (int i = 0; i < allCreatures.Count; i++)
         {
-            _allCreatures[i].Go.transform.SetSiblingIndex(i);
+            allCreatures[i].Go.transform.SetSiblingIndex(i);
         }
     }
 
     public void ResetPage()
     {
-        for (int i = 0; i < _allCreatures.Count; i++)
+        for (int i = 0; i < allCreatures.Count; i++)
         {
-            _allCreatures[i].Go.GetComponent<CharacterInfoAssigner>().RemoveCreature();
+            allCreatures[i].Go.GetComponent<CharacterInfoAssigner>().RemoveCreature();
         }
-        _allCreatures = new List<CreatureInfo>();
-        _container.sizeDelta = Vector2.zero;
+        allCreatures = new List<CreatureInfo>();
+        container.sizeDelta = Vector2.zero;
     }
 
     private void ClearCreationWindow()
     {
-        _nameField.text = "";
-        _numbField.text = "";
+        nameField.text = "";
+        numbField.text = "";
     }
 }

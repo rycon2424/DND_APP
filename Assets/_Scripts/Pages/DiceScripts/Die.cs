@@ -8,14 +8,13 @@ public class Die
 {
     public Die(int identifier)
     {
-        _identifier = identifier;
+        this.identifier = identifier;
     }
 
-    [SerializeField]
-    private int _identifier;
+    [SerializeField] int identifier;
 
     public int Roll()
     {
-        return UnityEngine.Random.Range(1, _identifier + 1);
+        return UnityEngine.Random.Range(1, identifier + 1);
     }
 }

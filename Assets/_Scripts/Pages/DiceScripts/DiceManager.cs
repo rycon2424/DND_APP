@@ -5,28 +5,26 @@ using TMPro;
 
 public class DiceManager : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text _outputText;
+    [SerializeField] TMP_Text outputText;
 
-    private int[] _dieAmounts = new int[7] { 0, 0, 0, 0, 0, 0, 0};
+    int[] dieAmounts = new int[7] { 0, 0, 0, 0, 0, 0, 0};
 
-    [SerializeField]
-    private TMP_Text _modifierText;
-    private int _modifier = 0;
+    [SerializeField] TMP_Text modifierText;
+    int modifier = 0;
 
-    private List<Die> _dice = new List<Die>();
+    List<Die> dice = new List<Die>();
 
-    private bool _hasRolled;
+    bool hasRolled;
 
     public void AddDie(int dieIdentifier)
     {
-        if (_hasRolled)
+        if (hasRolled)
         {
-            _outputText.text = "";
-            _hasRolled = false;
+            outputText.text = "";
+            hasRolled = false;
         }
 
-        _dice.Add(new Die(dieIdentifier));
+        dice.Add(new Die(dieIdentifier));
 
         int index = 0;      //Link the correct text componenets and amounts to the clicked button
         string dieNumber = "";
@@ -65,62 +63,62 @@ public class DiceManager : MonoBehaviour
                 dieNumber = "??";
                 break;
         }
-        _dieAmounts[index]++;
-        if (_outputText.text == "")
+        dieAmounts[index]++;
+        if (outputText.text == "")
         {
-            _outputText.text = dieNumber;
+            outputText.text = dieNumber;
         }
         else
         {
-            _outputText.text += " + " + dieNumber;
+            outputText.text += " + " + dieNumber;
         }
     }
 
     public void RollAll()
     {
-        if (_dice.Count == 0)
+        if (dice.Count == 0)
         {
-            _hasRolled = true;
-            _outputText.text = "Select the dices to use!";
+            hasRolled = true;
+            outputText.text = "Select the dices to use!";
             return;
         }
         int totalRoll = 0;
         string displayedText = "";
-        for (int i = 0; i < _dice.Count; i++)
+        for (int i = 0; i < dice.Count; i++)
         {
-            int roll = _dice[i].Roll();
+            int roll = dice[i].Roll();
             totalRoll += roll;
             displayedText += roll;
-            if (i != _dice.Count - 1)
+            if (i != dice.Count - 1)
             {
                 displayedText += " + ";
             }
         }
-        totalRoll += _modifier;
+        totalRoll += modifier;
         displayedText += AddModifierText();
-        _outputText.text = displayedText + " = " + totalRoll.ToString();
-        _hasRolled = true;
-        _dice.Clear();
-        _dice = new List<Die>();
+        outputText.text = displayedText + " = " + totalRoll.ToString();
+        hasRolled = true;
+        dice.Clear();
+        dice = new List<Die>();
     }
 
     public void AdjustModifier(bool addUp)
     {
-        _modifierText.text = "";
+        modifierText.text = "";
         if (addUp)
         {
-            _modifier++;
+            modifier++;
         }
         else
         {
-            _modifier--;
+            modifier--;
         }
 
-        if (_modifier > 0)
+        if (modifier > 0)
         {
-            _modifierText.text += "+";
+            modifierText.text += "+";
         }
-        _modifierText.text += _modifier.ToString();
+        modifierText.text += modifier.ToString();
     }
 
     public void RollStaight()
@@ -128,9 +126,9 @@ public class DiceManager : MonoBehaviour
         string output = "";
         int roll = new Die(20).Roll();
         output += roll.ToString() + AddModifierText();
-        roll += _modifier;
+        roll += modifier;
         output += " = " + roll;
-        _outputText.text = output;
+        outputText.text = output;
     }
 
     public void RollAdvantage()
@@ -140,9 +138,9 @@ public class DiceManager : MonoBehaviour
         int roll2 = new Die(20).Roll();
         int highest = Mathf.Max(roll1, roll2);
         output += "(" + roll1.ToString() + " + " + roll2.ToString() + ")" + AddModifierText();
-        highest += _modifier;
+        highest += modifier;
         output += " = " + highest;
-        _outputText.text = output;
+        outputText.text = output;
     }
 
     public void RollDisadvantage()
@@ -152,30 +150,30 @@ public class DiceManager : MonoBehaviour
         int roll2 = new Die(20).Roll();
         int lowest = Mathf.Min(roll1, roll2);
         output += "(" + roll1.ToString() + " + " + roll2.ToString() + ")" + AddModifierText();
-        lowest += _modifier;
+        lowest += modifier;
         output += " = " + lowest;
-        _outputText.text = output;
+        outputText.text = output;
     }
 
     public void ResetPage()
     {
-        _modifier = 0;
-        _modifierText.text = _modifier.ToString();
-        _outputText.text = "";
-        _dice.Clear();
-        _dice = new List<Die>();
+        modifier = 0;
+        modifierText.text = modifier.ToString();
+        outputText.text = "";
+        dice.Clear();
+        dice = new List<Die>();
     }
 
     private string AddModifierText()
     {
         string displayedText = "";
-        if (_modifier > 0)
+        if (modifier > 0)
         {
-            displayedText += " + (+" + _modifier + ")";
+            displayedText += " + (+" + modifier + ")";
         }
-        else if (_modifier < 0)
+        else if (modifier < 0)
         {
-            displayedText += " - (-" + Mathf.Abs(_modifier) + ")";
+            displayedText += " - (-" + Mathf.Abs(modifier) + ")";
 
         }
         return displayedText;
