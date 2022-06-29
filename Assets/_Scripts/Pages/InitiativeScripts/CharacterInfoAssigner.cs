@@ -6,14 +6,14 @@ using TMPro;
 public class CharacterInfoAssigner : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text _name;
+    private TMP_Text characterName;
     [SerializeField]
-    private TMP_Text _initiative;
+    private TMP_Text initiative;
 
     public void ApplyCreatureInfo(CreatureInfo creatureInfo)
     {
-        _name.text = creatureInfo.Name;
-        _initiative.text = creatureInfo.Initiative.ToString();
+        characterName.text = creatureInfo.Name;
+        initiative.text = creatureInfo.Initiative.ToString();
     }
 
     public void RemoveCreature()

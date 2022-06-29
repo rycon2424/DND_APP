@@ -17,46 +17,45 @@ public class Calculator : MonoBehaviour
         Clear = 5
     }
 
-    [SerializeField]
-    private TMP_Text _display;
-    private float _numInput1 = 0;
-    private float _numInput2 = 0;
-    private Operator _opInput = Operator.None;
-    private Operator _oldOpInput = Operator.None;
+    [SerializeField] TMP_Text display;
+    float numInput1 = 0;
+    float numInput2 = 0;
+    Operator opInput = Operator.None;
+    Operator oldOpInput = Operator.None;
 
     private Operator OpInput
     {
         get
         {
-            return _opInput;
+            return opInput;
         }
         set
         {
-            _oldOpInput = OpInput;
-            _opInput = value;
+            oldOpInput = OpInput;
+            opInput = value;
         }
     }
 
     public void InputNumber(int input)
     {
-        if (_numInput1 == 0 && OpInput == Operator.None)
+        if (numInput1 == 0 && OpInput == Operator.None)
         {
-            _numInput1 = input;
+            numInput1 = input;
         }
         else if(OpInput == Operator.None)
         {
-            _numInput1 = float.Parse(_numInput1.ToString() + input.ToString());
+            numInput1 = float.Parse(numInput1.ToString() + input.ToString());
         }
         else
         {
-            _numInput2 = float.Parse(_numInput2.ToString() + input.ToString());
+            numInput2 = float.Parse(numInput2.ToString() + input.ToString());
         }
         UpdateUI();
     }
 
     public void InputOperator(int input)
     {
-        if (_numInput2 == 0)
+        if (numInput2 == 0)
         {
             OpInput = (Operator)input;
         }
@@ -73,11 +72,11 @@ public class Calculator : MonoBehaviour
     {
         if (OpInput == Operator.None)
         {
-            _display.text = _numInput1.ToString();
+            display.text = numInput1.ToString();
         }
         else
         {
-            string output = _numInput1.ToString();
+            string output = numInput1.ToString();
             switch (OpInput)
             {
                 case Operator.None:
@@ -107,51 +106,51 @@ public class Calculator : MonoBehaviour
                     break;
             }
 
-            if (_numInput2 != 0)
+            if (numInput2 != 0)
             {
-                output += " " + _numInput2.ToString();
+                output += " " + numInput2.ToString();
             }
 
-            _display.text = output;
+            display.text = output;
         }
     }
 
     public void Clear()
     {
-        _numInput1 = 0;
-        _numInput2 = 0;
+        numInput1 = 0;
+        numInput2 = 0;
         OpInput = Operator.None;
     }
 
     float GetSum()
     {
         float sum = 0;
-        if (_numInput2 == 0)
+        if (numInput2 == 0)
         {
-            sum = _numInput1;
+            sum = numInput1;
         }
-        else if (_oldOpInput == Operator.None)
+        else if (oldOpInput == Operator.None)
         {
-            sum = _numInput1;
+            sum = numInput1;
         }
         else
         {
-            switch (_oldOpInput)
+            switch (oldOpInput)
             {
                 case Operator.None:
                     sum = 0;
                     break;
                 case Operator.Divide:
-                    sum = _numInput1 / _numInput2;
+                    sum = numInput1 / numInput2;
                     break;
                 case Operator.Multiply:
-                    sum = _numInput1 * _numInput2;
+                    sum = numInput1 * numInput2;
                     break;
                 case Operator.Subtract:
-                    sum = _numInput1 - _numInput2;
+                    sum = numInput1 - numInput2;
                     break;
                 case Operator.AddUp:
-                    sum = _numInput1 + _numInput2;
+                    sum = numInput1 + numInput2;
                     break;
                 case Operator.Sum:
                     break;
@@ -164,9 +163,9 @@ public class Calculator : MonoBehaviour
             }
         }
 
-        _numInput1 = sum;
-        _numInput2 = 0;
-        _opInput = Operator.None;
+        numInput1 = sum;
+        numInput2 = 0;
+        opInput = Operator.None;
         return sum;
     }
 }

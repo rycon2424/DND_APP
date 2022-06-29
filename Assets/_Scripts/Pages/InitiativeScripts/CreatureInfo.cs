@@ -5,33 +5,33 @@ using UnityEngine;
 public class CreatureInfo
 {
     [SerializeField]
-    private string _name;
+    private string creatureName;
     [SerializeField]
-    private int _initiative;
-    private GameObject _go;
+    private int creatureInitiative;
+    private GameObject go;
 
     public string Name
     {
-        get { return _name; }
-        set { _name = value; }
+        get { return creatureName; }
+        set { creatureName = value; }
     }
 
     public int Initiative
     {
-        get { return _initiative; }
-        set { _initiative = value; }
+        get { return creatureInitiative; }
+        set { creatureInitiative = value; }
     }
 
     public GameObject Go
     {
-        get { return _go; }
-        set { _go = value; }
+        get { return go; }
+        set { go = value; }
     }
 
     public CreatureInfo(string name, int initiative, GameObject go)
     {
-        _name = name;
-        _initiative = initiative;
-        _go = go;
+        creatureName = name;
+        creatureInitiative = initiative;
+        this.go = go;
     }
 }
